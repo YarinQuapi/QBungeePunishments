@@ -1,0 +1,77 @@
+# This is the QPunishments messages file
+# These messages file is updated for version ${project.version}
+
+# --------------- Formatting Utilities --------------- #
+date_format: "MMM dd, yyyy HH:mm:ss"
+
+# --------------- Utility Messages --------------- #
+not_enough_args: "&cHey! you are missing some arguments!"
+player_not_found: "&cHey! the player was not found."
+player_not_online: "&cHey! the player was not found or not online."
+server_not_found: "&cHey! the server couldn't be found."
+player_punished: "&cHey! this player already an active punishment of this type!"
+command_not_found: "&cHey! we couldn't find the command you were looking for."
+staff_chat_message: "&b&lSC &7%1$s &8&l-> &r%2$s"
+removed: " &7(&aremoved&7)"
+permanent: "&bforever"
+invalid_ip_address: "&cHey! that's an invalid ip address!"
+
+# --------------- Commands --------------- #
+find_command: "&7The player &b%1$s &7is located in server &b%2$s"
+pardon_successful: "&7You have successfully pardoned &b%1$s &7from his &a%2$s"
+no_punishment_found: "&cHey! a player with a matching punishment couldn't be found."
+
+# --------------- Announcement Messages --------------- #
+perm_ban: "&e%1$s &cwas permanently banned for &a%2$s"
+temp_ban: "&e%1$s &cwas temporarily banned for &a%2$s &cuntil &e%3$s"
+perm_mute: "&e%1$s &cwas permanently muted for &a%2$s"
+temp_mute: "&e%1$s &cwas temporarily muted for &a%2$s &cuntil &e%3$s"
+perm_ip_ban: "&e<Hidden Ip> &cwas permanently banned for &a%1$s"
+temp_ip_ban: "&e<Hidden Ip> &cwas temporarily banned for &a%1$s &cuntil &e%2$s"
+perm_ip_mute: "&e<Hidden Ip> &cwas permanently muted for &a%1$s"
+temp_ip_mute: "&e<Hidden Ip> &cwas temporarily muted for &a%1$s &cuntil &e%2$s"
+kick: "&e%1$s &cwas kicked for &a%1$s"
+unban: "&b%1$s &7was unbanned!"
+unmute: "&b%1$s &7was unmuted!"
+unipban: "&b<Hidden Ip> &7was unbanned!"
+unipmute: "&b<Hidden Ip> &7was unmuted!"
+
+# --------------- General Messages --------------- #
+lookup_mode_all: "&7--------- &bLookup &7v&a%1$s &7---------\n"
+lookup_mode_specific: "&7--------- &bLookup &7v&a%1$s &e%2$s &7---------\n"
+you_are_muted: "&cYou have been muted until &e%1$s"
+you_are_banned_disconnect: "&cYou have been banned from this server\nfor &e%1$s\n§cThe ban expires at &e%2$s"
+you_are_banned_chat: "&cYou have been banned from this server for &e%1$s &cuntil &e%2$s"
+you_have_been_banned: "&cYou have been banned!"
+you_have_been_muted: "&cYou have been muted!"
+you_have_been_kicked: "&cYou were kicked from the server!"
+
+# --------------- General Lookup Messages --------------- #
+never_logged_on: "&cNever logged on"
+last_comments: "&7Last &b%1$s &7comments of &b%2$s&7:\n"
+last_punishments: "&7Last &b%1$s &7punishments of &b%2$s&7:\n"
+last_punishments_specific: "&7Last &b%1$s &7%2$s(s) of &b%3$s&7:\n"
+comment_added: "&7Successfully added a comment to &b%1$s"
+invalid_limit: "&cInvalid number, defaulting to &e3"
+no_punishments: "&cThis player has no punishments.\n"
+no_comments: "&cThis player has no comments.\n"
+punishment_format: "&8&l ->&7 #&b%1$s &7- &b%2$s &7• By: &b%3$s &7For: &b%4$s &7Until: &b%5$s"
+comment_format: "&8&l ->&r %1$s &7by: &b%2$s &7(&c%3$s&7) &7at &b%4$s"
+comment_format_debug: "&8&l ->&r %1$s &7by: &b%2$s &7(&c%3$s&7) &7at &b%4$s, Id#&b%5$s"
+last_login: "&7Last Login: &b%1$s\n"
+first_login: "&7First Login: &b%1$s\n"
+name_history: "&7Name History: "
+name_history_format: "&b%1$s&7"
+history_count: "&7History\n   ban: &b%1$s\n   &7mute: &b%2$s\n   &7kick: &b%3$s"
+
+lookup_ip_address: "&7Ip address: &b%s\n"
+lookup_ip_players_linked: "&7Linked Players: "
+lookup_ip_players_linked_format: "&b%s&7, "
+
+
+# --------------- General Admin Messages --------------- #
+action_unsuccessful: "&cSomething went wrong! perhaps id doesn't exist?"
+comment_edit_successful: "&7Successfully edited comment with Id#&b%1$s"
+comment_removal_successful: "&7Successfully removed comment with Id#&b%1$s"
+comment_retrieve: "&c%1$s &8&l->&r %2$s &7by: &b%3$s &7(&b%4$s&7) &7at &b%5$s, Id#&b%6$s"
+punishment_removal_successful: "&7Successfully removed punishment with Id#&b%1$s"

@@ -1,0 +1,33 @@
+# QPunishments config
+# This config is updated for QPunishments ${project.version}
+
+announcements:
+  punishments:
+    ban: true
+    mute: true
+    kick: true
+
+staff-chat:
+  enabled: true
+  chat-char: '@'
+
+# Blocked commands while muted
+blocked-commands:
+  - r
+  - tell
+  - whisper
+  - msg
+
+mysql:
+  host:
+  port: 3306
+  database: qpunishments
+  user:
+  pass:
+  ssl: false
+
+redis:
+  enabled: false
+  host:
+  port: 6379
+  pass:
