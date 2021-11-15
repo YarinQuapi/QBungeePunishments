@@ -37,8 +37,8 @@ public class RedisHandler {
         jedis.auth(pass);
         jedis.connect();
 
-        QBungeePunishments.getInstance().getServer().getScheduler().runAsync(QBungeePunishments.getInstance(), this::subscribePunishmentListener);
-        QBungeePunishments.getInstance().getServer().getScheduler().runAsync(QBungeePunishments.getInstance(), this::subscribeStaffChatListener);
+        QBungeePunishments.getInstance().getProxy().getScheduler().runAsync(QBungeePunishments.getInstance(), this::subscribePunishmentListener);
+        QBungeePunishments.getInstance().getProxy().getScheduler().runAsync(QBungeePunishments.getInstance(), this::subscribeStaffChatListener);
 
         System.out.println("[QRedis v0.1B] enabled! please report any bugs! :D");
     }
@@ -52,7 +52,7 @@ public class RedisHandler {
     }
 
     public void postStaffChatMessage(String messageFormatted) {
-        jedis.publish("qpstaffchat-" + QBungeePunishments.getInstance().getServer(), messageFormatted);
+        jedis.publish("qpstaffchat-" + QBungeePunishments.getInstance().getProxy(), messageFormatted);
     }
 
     protected void subscribePunishmentListener() {
@@ -83,7 +83,7 @@ public class RedisHandler {
         jSub.subscribe(new JedisPubSub() {
             @Override
             public void onMessage(String channel, String message) {
-                for (ProxiedPlayer proxiedPlayer : QBungeePunishments.getInstance().getServer().getPlayers().stream().filter(x -> x.hasPermission("qpunishments.commands.staffchat")).collect(Collectors.toList())) {
+                for (ProxiedPlayer proxiedPlayer : QBungeePunishments.getInstance().getProxy().getPlayers().stream().filter(x -> x.hasPermission("qpunishments.commands.staffchat")).collect(Collectors.toList())) {
                     proxiedPlayer.sendMessage(new TextComponent(message));
                 }
             }

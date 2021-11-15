@@ -100,7 +100,7 @@ public class MySQLHandler {
                 System.out.println("Successfully connected to MySQL database!");
             }
 
-            QBungeePunishments.getInstance().getServer().getScheduler().schedule(QBungeePunishments.getInstance(), () -> get("SELECT NOW();"), 120L, 120L, TimeUnit.SECONDS);
+            QBungeePunishments.getInstance().getProxy().getScheduler().schedule(QBungeePunishments.getInstance(), () -> get("SELECT NOW();"), 120L, 120L, TimeUnit.SECONDS);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             System.out.println("Something went horribly wrong while connecting to database!");

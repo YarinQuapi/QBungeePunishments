@@ -1,6 +1,5 @@
 package me.yarinlevi.qpunishments.punishments;
 
-import com.velocitypowered.api.proxy.Player;
 import lombok.Getter;
 import lombok.Setter;
 import me.yarinlevi.qpunishments.exceptions.PlayerNotFoundException;
@@ -11,6 +10,7 @@ import me.yarinlevi.qpunishments.support.bungee.messages.MessagesUtils;
 import me.yarinlevi.qpunishments.utilities.MojangAccountUtils;
 import me.yarinlevi.qpunishments.utilities.RedisHandler;
 import me.yarinlevi.qpunishments.utilities.Utilities;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.Date;
@@ -80,8 +80,8 @@ public class Punishment {
     }
 
     public void execute(boolean fromRedis) {
-        if (!ipPunishment && QBungeePunishments.getInstance().getServer().getPlayer(punished_player_uuid).isPresent()) {
-            Player player = QBungeePunishments.getInstance().getServer().getPlayer(punished_player_uuid).orElseThrow();
+        if (!ipPunishment && QBungeePunishments.getInstance().getProxy().getPlayer(punished_player_uuid) != null) {
+            ProxiedPlayer player = QBungeePunishments.getInstance().getProxy().getPlayer(punished_player_uuid);
 
             switch (punishmentType) {
                 case BAN -> player.disconnect(MessagesUtils.getMessage("you_have_been_banned"));
@@ -95,9 +95,9 @@ public class Punishment {
 
             List<String> sqlQueue = new ArrayList<>();
 
-            List<Player> executedPlayers = new ArrayList<>();
+            List<ProxiedPlayer> executedPlayers = new ArrayList<>();
 
-            for (Player player : QBungeePunishments.getInstance().getServer().getAllPlayers().stream().filter(x -> x.getRemoteAddress().getAddress().getHostAddress().equals(rawIpAddress)).collect(Collectors.toList())) {
+            for (ProxiedPlayer player : QBungeePunishments.getInstance().getProxy().getPlayers().stream().filter(x -> x.getAddress().getAddress().getHostAddress().equals(rawIpAddress)).collect(Collectors.toList())) {
                 sqlQueue.add(this.addToExecuteQueue(player.getUniqueId()));
 
                 executedPlayers.add(player);
@@ -107,8 +107,8 @@ public class Punishment {
                 QBungeePunishments.getInstance().getMysql().insertLarge(sqlQueue);
             }
 
-            for (Player player : executedPlayers) {
-                if (player.isActive()) {
+            for (ProxiedPlayer player : executedPlayers) {
+                if (player.isConnected()) {
                     switch (punishmentType) {
                         case BAN -> player.disconnect(MessagesUtils.getMessage("you_have_been_banned"));
                         case MUTE -> player.sendMessage(MessagesUtils.getMessage("you_have_been_muted"));

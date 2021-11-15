@@ -1,7 +1,5 @@
 package me.yarinlevi.qpunishments.commands.removing;
 
-import com.velocitypowered.api.command.CommandSource;
-import com.velocitypowered.api.command.SimpleCommand;
 import me.yarinlevi.qpunishments.exceptions.PlayerNotFoundException;
 import me.yarinlevi.qpunishments.punishments.PunishmentType;
 import me.yarinlevi.qpunishments.support.bungee.messages.MessagesUtils;
@@ -15,7 +13,6 @@ public class UnMuteCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-
         try {
             CommandUtils.remove(sender, args, PunishmentType.MUTE, false);
         } catch (PlayerNotFoundException e) {

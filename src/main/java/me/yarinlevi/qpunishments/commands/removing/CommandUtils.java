@@ -1,6 +1,5 @@
 package me.yarinlevi.qpunishments.commands.removing;
 
-import com.velocitypowered.api.command.CommandSource;
 import me.yarinlevi.qpunishments.exceptions.PlayerNotFoundException;
 import me.yarinlevi.qpunishments.exceptions.UUIDNotFoundException;
 import me.yarinlevi.qpunishments.punishments.PunishmentType;
@@ -9,11 +8,12 @@ import me.yarinlevi.qpunishments.support.bungee.messages.MessagesUtils;
 import me.yarinlevi.qpunishments.utilities.MojangAccountUtils;
 import me.yarinlevi.qpunishments.utilities.MySQLHandler;
 import me.yarinlevi.qpunishments.utilities.Utilities;
+import net.md_5.bungee.api.CommandSender;
 
 import java.io.IOException;
 
 public class CommandUtils {
-    public static void remove(CommandSource sender, String[] args, PunishmentType type, boolean ip) throws PlayerNotFoundException {
+    public static void remove(CommandSender sender, String[] args, PunishmentType type, boolean ip) throws PlayerNotFoundException {
         if (args.length == 0) {
             sender.sendMessage(MessagesUtils.getMessage("not_enough_args"));
         } else {

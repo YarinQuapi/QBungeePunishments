@@ -5,7 +5,6 @@ import lombok.SneakyThrows;
 import me.yarinlevi.qpunishments.commands.CommentCommand;
 import me.yarinlevi.qpunishments.commands.LookupCommand;
 import me.yarinlevi.qpunishments.commands.LookupIpCommand;
-import me.yarinlevi.qpunishments.commands.administration.ReloadMessagesCommand;
 import me.yarinlevi.qpunishments.commands.executing.*;
 import me.yarinlevi.qpunishments.commands.removing.UnBanCommand;
 import me.yarinlevi.qpunishments.commands.removing.UnIpBanCommand;
@@ -75,19 +74,16 @@ public final class QBungeePunishments extends Plugin {
         pluginManager.registerCommand(this, new UnMuteCommand("qunmute", "qpunishments.command.qunmute", "unmute"));
 
         // Ip Punishment commands
-        pluginManager.registerCommand("ipban", new IpBanCommand(), "qipban", "qiptempban");
-        pluginManager.registerCommand("ipmute", new IpMuteCommand(), "qipmute", "qiptempmute");
-        pluginManager.registerCommand("unipban", new UnIpBanCommand(), "qunipban");
-        pluginManager.registerCommand("unipmute", new UnIpMuteCommand(), "qunipmute");
+        pluginManager.registerCommand(this, new IpBanCommand("ipban", "qpunishments.command.qipban", "qipban", "qiptempban"));
+        pluginManager.registerCommand(this, new IpMuteCommand("ipmute", "qpunishments.command.qipmute", "qipmute", "qiptempmute"));
+        pluginManager.registerCommand(this, new UnIpBanCommand("unipban", "qpunishments.command.qunipban", "qunipban"));
+        pluginManager.registerCommand(this, new UnIpMuteCommand("unipmute", "qpunishments.command.qunipmute", "qunipmute"));
 
         // History and proof commands
-        pluginManager.registerCommand("comment", new CommentCommand(), "addcomment");
-        pluginManager.registerCommand("lookup", new LookupCommand());
-        pluginManager.registerCommand("lookupip", new LookupIpCommand());
-        pluginManager.registerCommand("history", new HistoryCommand(), "ha", "historyadmin");
-
-        // Utilities
-        pluginManager.registerCommand("reloadmessages", new ReloadMessagesCommand());
+        pluginManager.registerCommand(this, new CommentCommand("comment", "qpunishments.command.comment", "addcomment", "qcomment"));
+        pluginManager.registerCommand(this, new LookupCommand("lookup", "qpunishemnts.command.lookup"));
+        pluginManager.registerCommand(this, new LookupIpCommand("lookupip", "qpunishments.command.lookupip"));
+        pluginManager.registerCommand(this, new HistoryCommand("history", "qpunishments.command.historyadmin", "ha", "historyadmin"));
 
 
         // Listeners for ban and chat control

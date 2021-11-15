@@ -62,7 +62,7 @@ public class PunishmentBuilder {
     }
 
     public PunishmentBuilder setServer(String serverName) throws ServerNotExistException {
-        if (!Objects.equals(serverName, "global") && QBungeePunishments.getInstance().getServer().getAllServers().stream().noneMatch(x -> x.getServerInfo().getName().equals(serverName))) throw new ServerNotExistException();
+        if (!Objects.equals(serverName, "global") && !QBungeePunishments.getInstance().getProxy().getServers().containsKey(serverName)) throw new ServerNotExistException();
 
         this.server = serverName;
 

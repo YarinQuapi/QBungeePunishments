@@ -31,8 +31,8 @@ public class MojangAccountUtils {
      * @throws IOException Something went wrong with Mojang's servers and a connection was not possible.
      */
     public static String getUUID(String playerName) throws UUIDNotFoundException, IOException {
-        return QBungeePunishments.getInstance().getServer().getPlayer(playerName) != null ?
-                QBungeePunishments.getInstance().getServer().getPlayer(playerName).getUniqueId().toString() :
+        return QBungeePunishments.getInstance().getProxy().getPlayer(playerName) != null ?
+                QBungeePunishments.getInstance().getProxy().getPlayer(playerName).getUniqueId().toString() :
                 insertDashToUUID(getUUIDOfUsername(playerName));
     }
 
