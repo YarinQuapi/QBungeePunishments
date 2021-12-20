@@ -1,0 +1,5 @@
+name: QBungeePunishments
+main: me.yarinlevi.qpunishments.support.bungee.QBungeePunishments
+version: ${project.version}
+description: An all-in-one punishment system for Minecraft proxies
+author: Quapi
