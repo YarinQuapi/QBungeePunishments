@@ -1,6 +1,7 @@
 package me.yarinlevi.qpunishments.commands;
 
 import me.yarinlevi.qpunishments.history.QueryMode;
+import me.yarinlevi.qpunishments.support.bungee.QBungeePunishments;
 import me.yarinlevi.qpunishments.support.bungee.messages.MessagesUtils;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
@@ -57,7 +58,10 @@ public class LookupIpCommand extends Command {
                 mode = QueryMode.ALL;
             }
 
-            LookupShared.printLookup(sender, targetPlayer, mode, limit, debug, true);
+            final int limitTemp = limit;
+            final boolean debugTemp = debug;
+
+            QBungeePunishments.getInstance().getProxy().getScheduler().runAsync(QBungeePunishments.getInstance(), () -> LookupShared.printLookup(sender, targetPlayer, mode, limitTemp, debugTemp, true));
         }
     }
 }
