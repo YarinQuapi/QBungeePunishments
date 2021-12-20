@@ -43,7 +43,7 @@ public class MySQLHandler {
         //MYSQL 8.x CONNECTOR - com.mysql.cj.jdbc.MysqlDataSource
         //MYSQL 5.x CONNECTOR - com.mysql.jdbc.jdbc2.optional.MysqlDataSource
 
-        dataSource.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+        dataSource.setDataSourceClassName("com.mysql.cj.jdbc.MysqlDataSource");
         dataSource.addDataSourceProperty("serverName", hostName);
         dataSource.addDataSourceProperty("port", port);
         dataSource.addDataSourceProperty("databaseName", database);
@@ -51,7 +51,6 @@ public class MySQLHandler {
         dataSource.addDataSourceProperty("password", pass);
         dataSource.addDataSourceProperty("useSSL", config.getBoolean("mysql.ssl"));
         dataSource.addDataSourceProperty("autoReconnect", true);
-        dataSource.addDataSourceProperty("useUnicode", true);
         dataSource.addDataSourceProperty("characterEncoding", "UTF-8");
 
         String punishmentTableSQL = "CREATE TABLE IF NOT EXISTS `punishments`(" +
