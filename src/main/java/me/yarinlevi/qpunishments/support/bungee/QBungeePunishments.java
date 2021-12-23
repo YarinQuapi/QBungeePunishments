@@ -34,7 +34,7 @@ import static me.yarinlevi.qpunishments.utilities.Utilities.registerFile;
  * @author YarinQuapi
  */
 public final class QBungeePunishments extends Plugin {
-    @Getter private final String version = "0.1A";
+    @Getter private final String version = "0.1A-HF1";
     @Getter private static QBungeePunishments instance;
     @Getter private MySQLHandler mysql;
     @Getter private RedisHandler redis;
