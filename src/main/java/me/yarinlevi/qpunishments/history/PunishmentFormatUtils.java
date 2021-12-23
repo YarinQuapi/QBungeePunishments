@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 
 public class PunishmentFormatUtils {
     public static TextComponent getLatestPunishmentsOfMember(String uuid, int count) throws PlayerNotFoundException, SQLException {
-        ResultSet resultSet = QBungeePunishments.getInstance().getMysql().get(String.format("SELECT * FROM `punishments` WHERE `punished_uuid`=\"%s\" ORDER BY date_added DESC LIMIT " + count + ";", uuid));
+        ResultSet resultSet = QBungeePunishments.getInstance().getDatabase().get(String.format("SELECT * FROM `punishments` WHERE `punished_uuid`=\"%s\" ORDER BY date_added DESC LIMIT " + count + ";", uuid));
 
         String name;
         if (!Utilities.validIP(uuid)) {
@@ -34,7 +34,7 @@ public class PunishmentFormatUtils {
     }
 
     public static TextComponent getLatestSpecificPunishmentsOfMember(String uuid, PunishmentType type, int count) throws PlayerNotFoundException, SQLException {
-        ResultSet resultSet = QBungeePunishments.getInstance().getMysql().get(String.format("SELECT * FROM `punishments` WHERE `punished_uuid`=\"%s\" AND `punishment_type`=\"%s\" ORDER BY date_added DESC LIMIT " + count, uuid, type.getKey().toLowerCase()));
+        ResultSet resultSet = QBungeePunishments.getInstance().getDatabase().get(String.format("SELECT * FROM `punishments` WHERE `punished_uuid`=\"%s\" AND `punishment_type`=\"%s\" ORDER BY date_added DESC LIMIT " + count, uuid, type.getKey().toLowerCase()));
 
         String name = MojangAccountUtils.getName(uuid);
 

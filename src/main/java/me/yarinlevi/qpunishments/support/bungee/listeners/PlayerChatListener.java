@@ -41,7 +41,7 @@ public class PlayerChatListener implements Listener {
                 String sql = String.format("SELECT * FROM punishments WHERE `punished_uuid`=\"%s\" AND `punishment_type`=\"mute\" AND `expire_date` > \"%s\" OR `punished_uuid`=\"%s\" AND `expire_date`=0 AND `punishment_type`=\"mute\" ORDER BY id DESC;",
                         sender.getUniqueId().toString(), System.currentTimeMillis(), sender.getUniqueId().toString());
 
-                ResultSet rs = QBungeePunishments.getInstance().getMysql().get(sql);
+                ResultSet rs = QBungeePunishments.getInstance().getDatabase().get(sql);
 
                 try {
                     if (rs != null && rs.next()) {

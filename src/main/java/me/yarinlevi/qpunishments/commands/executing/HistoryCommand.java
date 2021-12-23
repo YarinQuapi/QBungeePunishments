@@ -40,7 +40,7 @@ public class HistoryCommand extends Command {
 
                                 String sql = "UPDATE `comments` SET `content`=\"" + sb + "\"  WHERE `id`=" + id;
 
-                                if (QBungeePunishments.getInstance().getMysql().update(sql) != 0) {
+                                if (QBungeePunishments.getInstance().getDatabase().update(sql) != 0) {
                                     sender.sendMessage(MessagesUtils.getMessage("comment_edit_successful", id));
                                 } else sender.sendMessage(MessagesUtils.getMessage("action_unsuccessful"));
                             } else sender.sendMessage(MessagesUtils.getMessage("not_enough_args"));
@@ -49,7 +49,7 @@ public class HistoryCommand extends Command {
                         case "removecomment", "rc" -> {
                             String sql = "DELETE FROM `comments` WHERE `id`=" + id;
 
-                            if (QBungeePunishments.getInstance().getMysql().update(sql) != 0) {
+                            if (QBungeePunishments.getInstance().getDatabase().update(sql) != 0) {
                                 sender.sendMessage(MessagesUtils.getMessage("comment_removal_successful", id));
                             } else sender.sendMessage(MessagesUtils.getMessage("action_unsuccessful"));
                         }
@@ -57,7 +57,7 @@ public class HistoryCommand extends Command {
                         case "removepunishment", "rp" -> {
                             String sql = "DELETE FROM `punishments` WHERE `id`=" + id;
 
-                            if (QBungeePunishments.getInstance().getMysql().update(sql) != 0) {
+                            if (QBungeePunishments.getInstance().getDatabase().update(sql) != 0) {
                                 sender.sendMessage(MessagesUtils.getMessage("punishment_removal_successful", id));
                             } else sender.sendMessage(MessagesUtils.getMessage("action_unsuccessful"));
                         }
@@ -65,7 +65,7 @@ public class HistoryCommand extends Command {
                         case "retrievecomment", "getcomment", "gc" -> {
                             String sql = "SELECT * FROM `comments` WHERE `id`=" + id;
 
-                            ResultSet rs = QBungeePunishments.getInstance().getMysql().get(sql);
+                            ResultSet rs = QBungeePunishments.getInstance().getDatabase().get(sql);
 
                             try {
                                 if (rs != null && rs.next()) {

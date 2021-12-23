@@ -105,7 +105,7 @@ public class Punishment {
             }
 
             if (!sqlQueue.isEmpty()) {
-                QBungeePunishments.getInstance().getMysql().insertLarge(sqlQueue);
+                QBungeePunishments.getInstance().getDatabase().insertLarge(sqlQueue);
             }
 
             for (ProxiedPlayer player : executedPlayers) {
@@ -217,7 +217,7 @@ public class Punishment {
             );
 
         }
-        QBungeePunishments.getInstance().getMysql().insert(sql);
+        QBungeePunishments.getInstance().getDatabase().insert(sql);
     }
 
     /**
