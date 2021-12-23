@@ -5,6 +5,10 @@ import me.yarinlevi.qpunishments.support.bungee.QBungeePunishments;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
@@ -21,6 +25,16 @@ public class Utilities {
 
     public static boolean validIP(final String ip) {
         return ipPattern.matcher(ip).matches();
+    }
+
+    public static void registerFile(File file, String streamFileName) {
+        if (!file.exists()) {
+            try (InputStream in = QBungeePunishments.getInstance().getClass().getClassLoader().getResourceAsStream(streamFileName)) {
+                Files.copy(in, file.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static String getIpAddress(String playerName) throws PlayerNotFoundException {

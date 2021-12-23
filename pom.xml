@@ -6,7 +6,7 @@
 
     <groupId>me.yarinlevi</groupId>
     <artifactId>QBungeePunishments</artifactId>
-    <version>0.1D-1</version>
+    <version>0.1A-HF1</version>
     <packaging>jar</packaging>
 
     <name>QBungeePunishments</name>
@@ -125,6 +125,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.27</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

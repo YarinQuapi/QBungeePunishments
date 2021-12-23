@@ -1,10 +1,13 @@
 package me.yarinlevi.qpunishments.support.bungee;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import me.yarinlevi.qpunishments.commands.CommentCommand;
 import me.yarinlevi.qpunishments.commands.LookupCommand;
 import me.yarinlevi.qpunishments.commands.LookupIpCommand;
+import me.yarinlevi.qpunishments.commands.administration.ReloadConfig;
+import me.yarinlevi.qpunishments.commands.administration.ReloadMessages;
 import me.yarinlevi.qpunishments.commands.executing.*;
 import me.yarinlevi.qpunishments.commands.removing.UnBanCommand;
 import me.yarinlevi.qpunishments.commands.removing.UnIpBanCommand;
@@ -23,20 +26,19 @@ import net.md_5.bungee.config.YamlConfiguration;
 import org.bstats.bungeecord.Metrics;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.logging.Level;
+
+import static me.yarinlevi.qpunishments.utilities.Utilities.registerFile;
 
 /**
  * @author YarinQuapi
  */
 public final class QBungeePunishments extends Plugin {
-    @Getter private final String version = "0.1A-PrivateBungee";
+    @Getter private final String version = "0.1A";
     @Getter private static QBungeePunishments instance;
     @Getter private MySQLHandler mysql;
     @Getter private RedisHandler redis;
-    @Getter private Configuration config;
+    @Getter @Setter private Configuration config;
 
     @SneakyThrows
     @Override
@@ -57,7 +59,6 @@ public final class QBungeePunishments extends Plugin {
 
         registerFile(file1, "messages.yml");
         registerFile(file2, "config.yml");
-
 
         this.config = YamlConfiguration.getProvider(YamlConfiguration.class).load(file2);
         this.mysql = new MySQLHandler(this.config);
@@ -85,6 +86,10 @@ public final class QBungeePunishments extends Plugin {
         pluginManager.registerCommand(this, new LookupIpCommand("lookupip", "qpunishments.command.lookupip"));
         pluginManager.registerCommand(this, new HistoryCommand("history", "qpunishments.command.historyadmin", "ha", "historyadmin"));
 
+        // Administration commands
+        pluginManager.registerCommand(this, new ReloadConfig("qreloadconfig", "qpunishments.admin", "reloadconfig"));
+        pluginManager.registerCommand(this, new ReloadMessages("qreloadmessages", "qpunishments.admin", "reloadmessages"));
+
 
         // Listeners for ban and chat control
         PlayerChatListener chatListener = new PlayerChatListener();
@@ -103,18 +108,7 @@ public final class QBungeePunishments extends Plugin {
         }
 
         // BStats initialization
-        // Todo: replace serviceId
-        new Metrics(this, 12866);
-    }
-
-    private void registerFile(File file, String streamFileName) {
-        if (!file.exists()) {
-            try (InputStream in = this.getClass().getClassLoader().getResourceAsStream(streamFileName)) {
-                Files.copy(in, file.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        new Metrics(this, 13665);
     }
 
     private static int getJavaVersion() {

@@ -13,6 +13,7 @@ import me.yarinlevi.qpunishments.utilities.Utilities;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.jetbrains.annotations.Nullable;
 
+import java.net.InetSocketAddress;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -97,7 +98,7 @@ public class Punishment {
 
             List<ProxiedPlayer> executedPlayers = new ArrayList<>();
 
-            for (ProxiedPlayer player : QBungeePunishments.getInstance().getProxy().getPlayers().stream().filter(x -> x.getAddress().getAddress().getHostAddress().equals(rawIpAddress)).collect(Collectors.toList())) {
+            for (ProxiedPlayer player : QBungeePunishments.getInstance().getProxy().getPlayers().stream().filter(x -> ((InetSocketAddress) x.getSocketAddress()).getAddress().getHostAddress().equals(rawIpAddress)).collect(Collectors.toList())) {
                 sqlQueue.add(this.addToExecuteQueue(player.getUniqueId()));
 
                 executedPlayers.add(player);
