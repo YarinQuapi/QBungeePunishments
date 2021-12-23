@@ -23,7 +23,7 @@ public class PlayerSwitchServerListener implements Listener {
                         String sql = String.format("SELECT * FROM punishments WHERE `punished_uuid`=\"%s\" AND `punishment_type`=\"ban\" AND `expire_date` > \"%s\" OR `punished_uuid`=\"%s\" AND `expire_date`=0 AND `punishment_type`=\"ban\"",
                                 event.getPlayer().getUniqueId().toString(), System.currentTimeMillis(), event.getPlayer().getUniqueId().toString());
 
-                        ResultSet rs = QBungeePunishments.getInstance().getMysql().get(sql);
+                        ResultSet rs = QBungeePunishments.getInstance().getDatabase().get(sql);
 
                         try {
                             if (rs != null && rs.next() && !rs.getBoolean("bypass_expire_date") && rs.getString("server").equals(event.getPlayer().getServer().getInfo().getName())) {

@@ -17,7 +17,7 @@ import me.yarinlevi.qpunishments.support.bungee.listeners.PlayerChatListener;
 import me.yarinlevi.qpunishments.support.bungee.listeners.PlayerConnectListener;
 import me.yarinlevi.qpunishments.support.bungee.listeners.PlayerSwitchServerListener;
 import me.yarinlevi.qpunishments.support.bungee.messages.MessagesUtils;
-import me.yarinlevi.qpunishments.utilities.MySQLHandler;
+import me.yarinlevi.qpunishments.utilities.QDatabase;
 import me.yarinlevi.qpunishments.utilities.RedisHandler;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
@@ -36,7 +36,7 @@ import static me.yarinlevi.qpunishments.utilities.Utilities.registerFile;
 public final class QBungeePunishments extends Plugin {
     @Getter private final String version = "0.1A-HF1";
     @Getter private static QBungeePunishments instance;
-    @Getter private MySQLHandler mysql;
+    @Getter private QDatabase database;
     @Getter private RedisHandler redis;
     @Getter @Setter private Configuration config;
 
@@ -61,7 +61,7 @@ public final class QBungeePunishments extends Plugin {
         registerFile(file2, "config.yml");
 
         this.config = YamlConfiguration.getProvider(YamlConfiguration.class).load(file2);
-        this.mysql = new MySQLHandler(this.config);
+        this.database = new QDatabase(this.config);
 
         new MessagesUtils();
 

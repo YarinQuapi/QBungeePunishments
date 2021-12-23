@@ -111,7 +111,7 @@ public class PunishmentBuilder {
         String sql = String.format("SELECT * FROM punishments WHERE `punished_uuid`=\"%s\" AND `punishment_type`=\"%s\" AND `expire_date` > \"%s\" OR `punished_uuid`=\"%s\" AND `expire_date`=0 AND `punishment_type`=\"%s\" ORDER BY id DESC;",
                 this.targetPlayerUUID, this.type, System.currentTimeMillis(), this.targetPlayerUUID, this.type);
 
-        ResultSet rs = QBungeePunishments.getInstance().getMysql().get(sql);
+        ResultSet rs = QBungeePunishments.getInstance().getDatabase().get(sql);
 
         if (rs != null && rs.next() && !rs.getBoolean("bypass_expire_date") && rs.getString("server").equalsIgnoreCase("global")) {
             throw new PlayerPunishedException();

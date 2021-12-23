@@ -18,7 +18,12 @@ blocked-commands:
   - whisper
   - msg
 
+sqlite:
+  enabled: false
+
+# MySQL is the default because there is no default SQLite driver for BungeeCord, an external driver needs to be downloaded
 mysql:
+  enabled: true
   host:
   port: 3306
   database: qpunishments

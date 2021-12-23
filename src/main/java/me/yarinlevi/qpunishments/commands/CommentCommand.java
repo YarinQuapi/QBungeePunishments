@@ -48,7 +48,7 @@ public class CommentCommand extends Command {
                         }
 
 
-                        QBungeePunishments.getInstance().getMysql()
+                        QBungeePunishments.getInstance().getDatabase()
                                 .insert(String.format("INSERT INTO `comments` (`punished_uuid`, `content`, `punished_by_uuid`, `punished_by_name`, `date_added`) VALUES (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\")",
                                         uuid, sb, senderUUID, senderName, System.currentTimeMillis()));
 

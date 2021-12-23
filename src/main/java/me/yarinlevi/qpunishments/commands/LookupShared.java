@@ -9,7 +9,7 @@ import me.yarinlevi.qpunishments.punishments.PunishmentType;
 import me.yarinlevi.qpunishments.support.bungee.QBungeePunishments;
 import me.yarinlevi.qpunishments.support.bungee.messages.MessagesUtils;
 import me.yarinlevi.qpunishments.utilities.MojangAccountUtils;
-import me.yarinlevi.qpunishments.utilities.MySQLHandler;
+import me.yarinlevi.qpunishments.utilities.QDatabase;
 import me.yarinlevi.qpunishments.utilities.Utilities;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -48,7 +48,7 @@ public class LookupShared {
                     textComponent.addExtra(MessagesUtils.getMessage("lookup_mode_all", QBungeePunishments.getInstance().getVersion()));
 
                     if (!ip) {
-                        ResultSet rs = MySQLHandler.getInstance().get("SELECT * FROM `playerData` WHERE `uuid`=\"" + uuidOrIp + "\";");
+                        ResultSet rs = QDatabase.getInstance().get("SELECT * FROM `playerData` WHERE `uuid`=\"" + uuidOrIp + "\";");
                         String firstLogin = MessagesUtils.getRawString("never_logged_on");
                         String lastLogin = MessagesUtils.getRawString("never_logged_on");
 
@@ -62,7 +62,7 @@ public class LookupShared {
 
                     } else {
 
-                        ResultSet playersLinked = MySQLHandler.getInstance().get("SELECT * FROM `playerData` WHERE `ip`=\"" + uuidOrIp + "\";");
+                        ResultSet playersLinked = QDatabase.getInstance().get("SELECT * FROM `playerData` WHERE `ip`=\"" + uuidOrIp + "\";");
 
                         TextComponent ipAddress = new TextComponent();
                         TextComponent playersLinkedComponent = MessagesUtils.getMessage("lookup_ip_players_linked");
@@ -87,7 +87,7 @@ public class LookupShared {
                     }
 
 
-                    ResultSet historyResults = MySQLHandler.getInstance().get("SELECT * FROM `punishments` WHERE `punished_uuid`=\"" + uuidOrIp + "\";");
+                    ResultSet historyResults = QDatabase.getInstance().get("SELECT * FROM `punishments` WHERE `punished_uuid`=\"" + uuidOrIp + "\";");
 
                     int ban = 0;
                     int mute = 0;

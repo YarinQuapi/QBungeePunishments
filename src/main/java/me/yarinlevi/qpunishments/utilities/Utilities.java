@@ -41,7 +41,7 @@ public class Utilities {
         if (QBungeePunishments.getInstance().getProxy().getPlayer(playerName) != null)
             return QBungeePunishments.getInstance().getProxy().getPlayer(playerName).getAddress().getAddress().getHostAddress();
 
-        ResultSet rs = QBungeePunishments.getInstance().getMysql().get(String.format("SELECT * FROM `playerData` WHERE `name`=\"%s\" ORDER BY lastLogin DESC;",
+        ResultSet rs = QBungeePunishments.getInstance().getDatabase().get(String.format("SELECT * FROM `playerData` WHERE `name`=\"%s\" ORDER BY lastLogin DESC;",
                 playerName));
 
         try {
