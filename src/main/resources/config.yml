@@ -11,12 +11,22 @@ staff-chat:
   enabled: true
   chat-char: '@'
 
-# Blocked commands while muted
+# Commands which are blocked while muted
 blocked-commands:
   - r
   - tell
   - whisper
   - msg
+
+# Commands which are always blocked
+blocked-commands-bypass-permission: "qpunishments.bypass.commandblock"
+general-blocked-commands:
+  - plugins
+  - pl
+  - bukkit:plugins
+  - bukkit:pl
+  - about
+  - ?
 
 sqlite:
   enabled: false

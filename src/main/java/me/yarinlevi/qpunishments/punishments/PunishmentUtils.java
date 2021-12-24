@@ -62,16 +62,14 @@ public class PunishmentUtils {
             if (ipPunishment) {
                 if (Utilities.validIP(args[0])) {
                     playerNameOrIp = args[0];
-                    Utilities.broadcast(new TextComponent("Ip valid: " + args[0]));
                 } else {
                     playerNameOrIp = Utilities.getIpAddress(args[0]);
-                    Utilities.broadcast(new TextComponent("Ip found from username: " + playerNameOrIp));
                 }
             } else playerNameOrIp = args[0];
         }
 
         // Duration construction
-        if (args.length > durationArgPos) {
+        if (args.length > durationArgPos && TimeFormatUtils.timePattern.matcher(args[durationArgPos]).matches()) {
             durationString = args[durationArgPos];
 
             try {

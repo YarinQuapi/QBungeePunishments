@@ -34,7 +34,7 @@ import static me.yarinlevi.qpunishments.utilities.Utilities.registerFile;
  * @author YarinQuapi
  */
 public final class QBungeePunishments extends Plugin {
-    @Getter private final String version = "0.1A-HF1";
+    @Getter private final String version = "0.1A-2";
     @Getter private static QBungeePunishments instance;
     @Getter private QDatabase database;
     @Getter private RedisHandler redis;
@@ -97,11 +97,6 @@ public final class QBungeePunishments extends Plugin {
         pluginManager.registerListener(this, new PlayerConnectListener());
         pluginManager.registerListener(this, chatListener);
         pluginManager.registerListener(this, new PlayerSwitchServerListener());
-
-        if (this.getProxy().getPluginManager().getPlugins().stream().anyMatch(x-> x.getDescription().getName().equalsIgnoreCase("qproxyutilities-bungeecord"))) {
-            chatListener.setQProxyUtilitiesFound(true);
-            QBungeePunishments.getInstance().getLogger().log(Level.WARNING, "QProxyUtilities found! staff chat disabled.");
-        }
 
         if (this.isRedis()) {
             redis = new RedisHandler(this.config);

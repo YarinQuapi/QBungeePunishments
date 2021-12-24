@@ -45,6 +45,7 @@ you_are_banned_chat: "&cYou have been banned from this server for &e%1$s &cuntil
 you_have_been_banned: "&cYou have been banned!"
 you_have_been_muted: "&cYou have been muted!"
 you_have_been_kicked: "&cYou were kicked from the server!"
+general_command_blocked: "Unknown command. Type \"/help\" for help."
 
 # --------------- General Lookup Messages --------------- #
 never_logged_on: "&cNever logged on"

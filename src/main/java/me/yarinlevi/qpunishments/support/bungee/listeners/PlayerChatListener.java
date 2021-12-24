@@ -4,6 +4,8 @@ import lombok.Setter;
 import me.yarinlevi.qpunishments.support.bungee.QBungeePunishments;
 import me.yarinlevi.qpunishments.support.bungee.messages.MessagesUtils;
 import me.yarinlevi.qpunishments.utilities.RedisHandler;
+import me.yarinlevi.qpunishments.utilities.Utilities;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -14,9 +16,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -26,15 +26,20 @@ public class PlayerChatListener implements Listener {
 
     private final Map<UUID, PlayerCache> cache = new HashMap<>();
 
+    private final List<String> blockedCommands = new ArrayList<>();
+    private final String bypassPermission;
+
     public PlayerChatListener() {
         QBungeePunishments.getInstance().getProxy().getScheduler().schedule(QBungeePunishments.getInstance(), cache::clear, 10L, TimeUnit.MINUTES);
+
+        blockedCommands.addAll(QBungeePunishments.getInstance().getConfig().getStringList("general-blocked-commands"));
+        bypassPermission = QBungeePunishments.getInstance().getConfig().getString("blocked-commands-bypass-permission");
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChat(ChatEvent event) {
         if (event.getSender() instanceof ProxiedPlayer sender) {
             if (cache.containsKey(sender.getUniqueId())) {
-
                 event.setCancelled(this.process(sender, event.getMessage()));
 
             } else {
@@ -86,6 +91,22 @@ public class PlayerChatListener implements Listener {
                     }
                 }
             }
+
+            // General command blocker (Network-wide)
+            if (event.isCommand()) {
+                String command = new StringBuilder(event.getMessage()).deleteCharAt(0).toString();
+
+
+                for (String cmd : blockedCommands) {
+                    if (command.startsWith(cmd)) {
+                        if (!sender.hasPermission(bypassPermission)) {
+                            event.setCancelled(true);
+                            sender.sendMessage(MessagesUtils.getMessage("general_command_blocked"));
+                        }
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -119,7 +140,13 @@ public class PlayerChatListener implements Listener {
 
     private record PlayerCache(UUID uuid, boolean valid, long until, boolean bypass, String server) {
         public boolean isPunished(String server) {
-            return (!valid || bypass || System.currentTimeMillis() > until) && (this.server.equalsIgnoreCase("global") || server.equalsIgnoreCase(this.server));
+            if (!valid) return false;
+
+            if (bypass) return false;
+
+            if (System.currentTimeMillis() > until && !(until == 0)) return false;
+
+            return this.server.equalsIgnoreCase("global") || this.server.equalsIgnoreCase(server);
         }
     }
 }

@@ -18,6 +18,7 @@ public class TimeFormatUtils {
 
     public static long parseDuration(final String durationStr) throws IllegalArgumentException, TimeNotDetectedException {
         final Matcher m = timePattern.matcher(durationStr);
+
         int days = 0;
         int hours = 0;
         int minutes = 0;
